@@ -219,38 +219,6 @@ function BDPFEP_extend_listing($custom, $action, $listing_id=null, $user_id=null
 
 function BDPFEP_fep_directory_arguments($aArgs)
 {
-    /*
-    if(isset($_REQUEST['bdpfep-bf'])){
-        $aCustomQuery = array();
-        $aCustomQuery['meta_query'] = array();
-        foreach ( $_REQUEST['bdpfep-bf'] as $sKey => $oData ) {
-        }
-    }
-    */
-    /*
-    global $wpdb;
-    
-    if(isset($_REQUEST['bdpfep-bf'])){
-        $aMetaField = array();
-        foreach ( $_REQUEST['bdpfep-bf'] as $sKey => $sValue ) {
-            if($sValue != ''){
-                array_push($aMetaField, '(B.meta_key = \'_wpbdp[fields][' . $sKey . ']\' AND B.meta_value LIKE \'' . $sValue . '%\')');
-            }
-        }
-    };
-    $sExtendQuery = '';
-    if(isset($aMetaField) && count($aMetaField) > 0){
-        $sExtendQuery = 'WHERE ( ' . implode(' OR ', $aMetaField) . ' ) AND A.post_type = \'wpbdp_listing\'';
-    }
-    $sQuery = "
-    SELECT DISTINCT(A.post_author) FROM $wpdb->posts A LEFT JOIN $wpdb->postmeta B ON A.ID = B.post_id $sExtendQuery";
-
-    echo $sQuery;
-
-    $aPosts = $wpdb->get_results($sQuery, ARRAY_A);
-    */
-
-    //echo '<pre>';
     $aMetaQuery = array();
     if(isset($_REQUEST['bdpfep-bf'])){
         foreach ( $_REQUEST['bdpfep-bf'] as $sKey => $sValue ) {
@@ -299,9 +267,6 @@ function BDPFEP_fep_directory_arguments($aArgs)
     if(count($aMetaQuery) > 0 && count($aIncludeAuthorId) == 0){
         $aArgs['role__in'] = 'cannot_find_any_user_____';
     }
-    //var_dump($aArgs);
-
-    //echo '</pre>';
     return $aArgs;
 }
 
